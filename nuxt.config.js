@@ -1,3 +1,5 @@
+const webpack = require('webpack')
+
 module.exports = {
   mode: 'universal',
   head: {
@@ -13,7 +15,7 @@ module.exports = {
   },
   loading: false,
   css: [
-    'element-ui/lib/theme-default/index.css'
+    '@/assets/main.scss'
   ],
   plugins: [
     '@/plugins/element-ui'

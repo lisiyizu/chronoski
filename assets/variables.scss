@@ -1,10 +1,19 @@
 /* theme color */
-$--color-primary: #2498a7;
+$--color-primary: #409EFF !default;
+$--color-primary-light-1: #53a8ff;
+$--color-primary-light-2: #66b1ff;
+$--color-primary-light-3: #79bbff;
+$--color-primary-light-4: #8cc5ff;
+$--color-primary-light-5: #a0cfff;
+$--color-primary-light-6: #b3d8ff;
+$--color-primary-light-7: #c6e2ff;
+$--color-primary-light-8: #d9ecff;
+$--color-primary-light-9: #ecf5ff;
 
 $--color-success: #67c23a !default;
-$--color-warning: #eb9e05 !default;
-$--color-danger: #fa5555 !default;
-$--color-info: #878d99 !default;
+$--color-warning: #e6a23c !default;
+$--color-danger: #f56c6c !default;
+$--color-info: #909399 !default;
 
 /* icon font path, required */
 $--font-path: "../node_modules/element-ui/lib/theme-chalk/fonts";
