@@ -1,8 +1,8 @@
 <template>
   <el-container>
-    <el-header>Header</el-header>
-    <el-main>Main</el-main>
-    <el-footer>Footer</el-footer>
+    <el-header>Tester si liste vide pour afficher le component formulaire sinon au clic</el-header>
+    <el-main></el-main>
+    <el-footer></el-footer>
   </el-container>
 </template>
 
