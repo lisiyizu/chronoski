@@ -8,10 +8,18 @@
         <i class="el-icon-plus"></i>
       </el-button>
     </el-header>
-    <el-main>
-      Liste des utilisateurs<br>
-      OU<br>
-      Formulaire de création si aucun utilisateur enregistré
+    <el-main class="Users__List">
+      <el-row>
+        <el-col class="Users__List__Item">
+          Liste des utilisateurs<br>
+          OU<br>
+          Formulaire de création si aucun utilisateur enregistré
+        </el-col>
+        <el-col class="Users__List__Item">
+          Liste des utilisateurs<br>
+          OU<br>
+          Formulaire de création si aucun utilisateur enregistré
+        </el-col>      </el-row>
     </el-main>
   </el-container>
 </template>
@@ -42,8 +50,15 @@ export default {
       }
     }
   }
-  .el-main {
-
+  &__List {
+    &__Item {
+      border-radius: 5px;
+      background-color: $--color-primary-light;
+      margin-bottom: 20px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 </style>
