@@ -1,7 +1,7 @@
 {
   "name": "chronoski",
   "version": "1.0.0",
-  "description": "Ski tournament timer",
+  "description": "Sauvegarder les temps des participants lors des compétitions de ski.",
   "author": "Alex",
   "private": true,
   "scripts": {
@@ -13,6 +13,7 @@
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/localforage": "^1.0.2",
     "@nuxtjs/pwa": "^2.0.5",
     "element-ui": "2.2.0",
     "nuxt": "1.3.0"

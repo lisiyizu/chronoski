@@ -9,6 +9,9 @@
       </el-button>
     </el-header>
     <el-main class="Users__List">
+      <pre>{{ users }}</pre>
+      <el-button @click="createUser">New user</el-button>
+      <el-button @click="deleteAll">Delete all</el-button>
       <el-row>
         <el-col class="Users__List__Item">
           Liste des utilisateurs<br>
@@ -19,13 +22,47 @@
           Liste des utilisateurs<br>
           OU<br>
           Formulaire de création si aucun utilisateur enregistré
-        </el-col>      </el-row>
+        </el-col>
+      </el-row>
     </el-main>
   </el-container>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      users: [],
+      user: {
+        firstname: '',
+        lastname: '',
+        avatar: 0
+      }
+    }
+  },
+  async mounted () {
+    this.users = await this.$localForage.getItem('users') || []
+  },
+  watch: {
+    users: {
+      deep: true,
+      handler: 'save'
+    }
+  },
+  methods: {
+    save (val) {
+      this.$localForage.setItem('users', val)
+    },
+    createUser () {
+      this.users.push(this.user)
+    },
+    updateUser () {
+
+    },
+    deleteAll () {
+      this.users = []
+    }
+  }
 }
 </script>
 

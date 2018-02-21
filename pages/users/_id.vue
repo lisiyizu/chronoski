@@ -5,13 +5,23 @@
         <i class="el-icon-back"></i>
       </nuxt-link>
     </el-header>
-    <el-main>Main</el-main>
+    <el-main>
+      content
+    </el-main>
     <el-footer>Footer</el-footer>
   </el-container>
 </template>
 
 <script>
 export default {
+  data () {
+    return {
+      user: null
+    }
+  },
+  async mounted () {
+    // this.users = await this.$localForage.keys()
+  }
 }
 </script>
 

@@ -21,8 +21,19 @@ module.exports = {
     '@/plugins/element-ui'
   ],
   modules: [
-    '@nuxtjs/pwa'
+    '@nuxtjs/pwa',
+    '@nuxtjs/localforage'
   ],
+  /*
+  ** PWA Options
+  */
+  manifest: {
+    lang: 'fr',
+    name: 'Chronoski',
+    short_name: 'Chronoski',
+    description: 'Sauvegarder les temps des participants lors des compétitions de ski',
+    theme_color: '#7097F1'
+  },
   build: {
     plugins: [
       new webpack.NormalModuleReplacementPlugin(/element-ui\/lib\/locale\/lang\/zh-CN/, 'element-ui/lib/locale/lang/fr')
