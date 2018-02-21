@@ -1,67 +1,23 @@
 <template>
-  <el-container class="Users">
-    <el-header>
-      <el-button type="text" @click="$router.push('/')" class="Action Action--left">
-        <i class="el-icon-back"></i>
-      </el-button>
-      <el-button type="text" class="Action Action--right">
-        <i class="el-icon-plus"></i>
-      </el-button>
-    </el-header>
-    <el-main class="Users__List">
-      <pre>{{ users }}</pre>
-      <el-button @click="createUser">New user</el-button>
-      <el-button @click="deleteAll">Delete all</el-button>
-      <el-row>
-        <el-col class="Users__List__Item">
-          Liste des utilisateurs<br>
-          OU<br>
-          Formulaire de création si aucun utilisateur enregistré
-        </el-col>
-        <el-col class="Users__List__Item">
-          Liste des utilisateurs<br>
-          OU<br>
-          Formulaire de création si aucun utilisateur enregistré
-        </el-col>
-      </el-row>
-    </el-main>
-  </el-container>
+  <component :is="view"/>
 </template>
 
 <script>
+import list from '@/components/layers/users'
+import form from '@/components/forms/user'
+
 export default {
+  components: {
+    list,
+    form
+  },
   data () {
     return {
-      users: [],
-      user: {
-        firstname: '',
-        lastname: '',
-        avatar: 0
-      }
+      view: 'list'
     }
   },
   async mounted () {
     this.users = await this.$localForage.getItem('users') || []
-  },
-  watch: {
-    users: {
-      deep: true,
-      handler: 'save'
-    }
-  },
-  methods: {
-    save (val) {
-      this.$localForage.setItem('users', val)
-    },
-    createUser () {
-      this.users.push(this.user)
-    },
-    updateUser () {
-
-    },
-    deleteAll () {
-      this.users = []
-    }
   }
 }
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div class="Home">
     <div class="Home__Content">
-      <nuxt-link to="users" class="Home__Content__Action">Participants</nuxt-link>
+      <nuxt-link to="users" class="Home__Content__Action">Utilisateurs</nuxt-link>
       <nuxt-link to="competitions" class="Home__Content__Action">Competitions</nuxt-link>
     </div>
   </div>
@@ -38,6 +38,7 @@ export default {
       cursor: pointer;
       transition: 500ms ease all;
       outline: none;
+      text-align: center;
       text-decoration: none;
       margin-top: 30px;
       &:hover {
