@@ -4,10 +4,7 @@
       <el-button type="text" @click="$router.push('/users')" class="Action Action--left">
         <i class="el-icon-back"></i>
       </el-button>
-      <el-button type="text" @click="deleteUser" class="Action Action--right">
-        <i class="el-icon-delete"></i>
-      </el-button>
-      <h1 class="Title">Édition d'un utilisateur</h1>
+      <h1 class="Title">Création d'un utilisateur</h1>
     </el-header>
     <el-main>
       <el-form ref="userForm" :model="form" :rules="rules">
@@ -48,43 +45,18 @@ export default {
       }
     }
   },
-  async mounted () {
-    let users = await this.$localForage.getItem('users') || null
-    if (users && this.$route.params.id < users.length) {
-      this.form = users[this.$route.params.id]
-    } else {
-      this.$router.push('/users')
-    }
-  },
   methods: {
-    deleteUser () {
-      this.$confirm('Êtes-vous certain de vouloir supprimer cet utilisateur?', 'Warning', {
-        confirmButtonText: 'Oui',
-        cancelButtonText: 'Non',
-        type: 'warning'
-      }).then(async () => {
-        let users = await this.$localForage.getItem('users')
-        users[this.$route.params.id].active = false
-        await this.$localForage.setItem('users', users)
-        this.$router.push('/users')
-        this.$message({
-          type: 'success',
-          showClose: true,
-          message: 'Utilisateur supprimé'
-        })
-      }).catch(() => {})
-    },
     save (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
           let users = await this.$localForage.getItem('users') || []
-          users[this.$route.params.id] = this.form
+          users.push(this.form)
           await this.$localForage.setItem('users', users)
           this.$router.push('/users')
           this.$message({
             type: 'success',
             showClose: true,
-            message: 'Utilisateur modifiée'
+            message: 'Utilisateur enregistré'
           })
         }
       })

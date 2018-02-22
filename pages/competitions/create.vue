@@ -4,10 +4,7 @@
       <el-button type="text" @click="$router.push('/competitions')" class="Action Action--left">
         <i class="el-icon-back"></i>
       </el-button>
-      <!-- <el-button type="text" class="Action Action--right">
-        <i class="el-icon-edit"></i>
-      </el-button> -->
-      <h1 class="Title">Nouvelle compétition</h1>
+      <h1 class="Title">Création d'une compétition</h1>
     </el-header>
     <el-main>
       <el-form ref="competitionForm" :model="form" :rules="rules">
@@ -78,6 +75,7 @@ export default {
           this.$router.push('/competitions/' + (competitions.length - 1))
           this.$message({
             type: 'success',
+            showClose: true,
             message: 'Compétition enregistrée'
           })
         }
@@ -86,7 +84,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~assets/variables';
-</style>

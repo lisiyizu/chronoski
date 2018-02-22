@@ -7,7 +7,7 @@
       <el-button type="text" @click="deleteCompetition" class="Action Action--right">
         <i class="el-icon-delete"></i>
       </el-button>
-      <h1 class="Title">Modification d'une compétition</h1>
+      <h1 class="Title">Édition d'une compétition</h1>
     </el-header>
     <el-main>
       <pre>{{ competition }}</pre>
@@ -71,11 +71,12 @@ export default {
         type: 'warning'
       }).then(async () => {
         let competitions = await this.$localForage.getItem('competitions')
-        competitions.splice(this.$route.params.id, 1)
+        competitions[this.$route.params.id].active = false
         await this.$localForage.setItem('competitions', competitions)
         this.$router.push('/competitions')
         this.$message({
           type: 'success',
+          showClose: true,
           message: 'Compétition supprimée'
         })
       }).catch(() => {})
@@ -109,6 +110,7 @@ export default {
           this.$router.push('/competitions/' + this.$route.params.id)
           this.$message({
             type: 'success',
+          showClose: true,
             message: 'Compétition modifiée'
           })
         }
@@ -117,7 +119,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~assets/variables';
-</style>

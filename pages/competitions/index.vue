@@ -11,7 +11,7 @@
     </el-header>
     <el-main>
       <ul v-if="competitions.length" class="List">
-        <li v-for="(c, i) in competitions" :key="i">
+        <li v-for="(c, i) in competitions" :key="i" v-if="c.active">
           <nuxt-link :to="'/competitions/' + i">
             <h2>{{ c.name }}</h2>
             <p>Le {{ c.date | getFrenchDate }}</p>
@@ -34,12 +34,7 @@ export default {
     }
   },
   async mounted () {
-    // await this.$localForage.setItem('competitions', [])
     this.competitions = await this.$localForage.getItem('competitions') || []
   }
 }
 </script>
-
-<style lang="scss">
-@import '~assets/variables';
-</style>

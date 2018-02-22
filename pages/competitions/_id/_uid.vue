@@ -7,7 +7,7 @@
       <el-button type="text" @click="deleteCompetition" class="Action Action--right">
         <i class="el-icon-delete"></i>
       </el-button>
-      <h1 class="Title">Modification d'une compétition</h1>
+      <h1 class="Title">Modification du #000</h1>
     </el-header>
     <el-main>
       <pre>{{ competition }}</pre>

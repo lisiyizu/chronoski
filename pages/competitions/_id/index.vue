@@ -61,11 +61,7 @@ export default {
   },
   async mounted () {
     let competitions = await this.$localForage.getItem('competitions') || null
-    if (competitions && this.$route.params.id < competitions.length) {
-      this.competition = competitions[this.$route.params.id]
-    } else {
-      this.$router.push('/competitions')
-    }
+    this.competition = competitions[this.$route.params.id]
   },
   methods: {
     save (formName) {
@@ -97,7 +93,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss">
-@import '~assets/variables';
-</style>

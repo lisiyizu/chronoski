@@ -114,6 +114,28 @@ body {
     .el-form {
       padding: 20px;
     }
+    .AvatarPicker {
+      text-align: center;
+      height: 64px;
+      margin-bottom: 20px;
+      img {
+        display: inline-block;
+      }
+      &--left {
+        width: 34px;
+        padding: 9px;
+        margin-right: 20px;
+        float: left;
+        margin-top: 16px;
+      }
+      &--right {
+        width: 34px;
+        padding: 9px;
+        margin-left: 20px;
+        float: right;
+        margin-top: 16px;
+      }
+    }
     .Empty {
       font-weight: 300;
       padding: 20px;
