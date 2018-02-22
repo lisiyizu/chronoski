@@ -17,7 +17,8 @@ export default {
     }
   },
   async mounted () {
-    this.users = await this.$localForage.getItem('users') || []
+    let users = await this.$localForage.getItem('users') || []
+    this.view = users.length ? 'list' : 'form'
   }
 }
 </script>

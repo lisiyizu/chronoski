@@ -18,7 +18,8 @@ module.exports = {
     '@/assets/main.scss'
   ],
   plugins: [
-    '@/plugins/element-ui'
+    '@/plugins/element-ui',
+    '@/plugins/filters.js',
   ],
   modules: [
     '@nuxtjs/pwa',
