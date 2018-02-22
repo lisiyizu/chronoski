@@ -21,7 +21,10 @@ body {
     .Title {
       text-align: center;
       font-weight: 300;
-      padding: 0 30px;
+      padding: 0 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .Action {
       color: #fff;
@@ -62,6 +65,49 @@ body {
             margin: 0;
             color: lighten($--color-primary, 10%);
           }
+          .Unknown {
+            float: left;
+            width: 64px;
+            height: 64px;
+            border-radius: 64px;
+            background-color: $--color-primary-light;
+            color: $--color-primary;
+            font-size: 32px;
+            line-height: 64px;
+            text-align: center;
+          }
+          img {
+            float: left;
+            display: block;
+          }
+          .User {
+            overflow: hidden;
+            padding-left: 20px;
+            height: 64px;
+            .el-tag {
+              border-radius: 16px;
+              color: #fff;
+              font-weight: 600;
+              min-width: 32px;
+              text-align: center;
+              border-color: $--color-primary;
+              background-color: $--color-primary;
+            }
+            h4 {
+              height: 32px;
+              line-height: 32px;
+              margin: 0;
+              font-weight: 400;
+              color: $--color-primary;
+              b {
+                color: $--color-primary-dark;
+              }
+            }
+            p {
+              height: 32px;
+              line-height: 32px;
+            }
+          }
         }
       }
     }
@@ -75,14 +121,24 @@ body {
       color: $--color-primary;
     }
   }
-  &__List {
-    &__Item {
-      border-radius: 5px;
-      background-color: $--color-primary-light;
-      margin-bottom: 20px;
-      &:last-child {
-        margin-bottom: 0;
+  .el-footer {
+    background-color: $--color-primary-light;
+    .Action {
+      color: $--color-primary;
+      font-size: 30px;
+      display: block;
+      margin-top: 2px;
+      &--left {
+        float: left;
       }
+      &--right {
+        float: right;
+      }
+    }
+    .Content {
+      overflow: hidden;
+      padding: 10px;
+      padding-left: 20px;
     }
   }
 }

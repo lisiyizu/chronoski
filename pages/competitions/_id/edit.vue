@@ -1,15 +1,16 @@
 <template>
   <el-container>
     <el-header>
-      <el-button type="text" @click="$router.push('/competitions')" class="Action Action--left">
+      <el-button type="text" @click="$router.push('/competitions/' + $route.params.id)" class="Action Action--left">
         <i class="el-icon-back"></i>
       </el-button>
-      <!-- <el-button type="text" class="Action Action--right">
-        <i class="el-icon-edit"></i>
-      </el-button> -->
-      <h1 class="Title">Nouvelle compétition</h1>
+      <el-button type="text" @click="deleteCompetition" class="Action Action--right">
+        <i class="el-icon-delete"></i>
+      </el-button>
+      <h1 class="Title">Modification d'une compétition</h1>
     </el-header>
     <el-main>
+      <pre>{{ competition }}</pre>
       <el-form ref="competitionForm" :model="form" :rules="rules">
         <el-form-item label="Nom" prop="name">
           <el-input v-model="form.name"></el-input>
@@ -32,6 +33,7 @@
 export default {
   data() {
     return {
+      competition: null,
       form: {
         name: '',
         date: new Date(),
@@ -52,7 +54,32 @@ export default {
       }
     }
   },
+  async mounted () {
+    let competitions = await this.$localForage.getItem('competitions') || null
+    if (competitions && this.$route.params.id < competitions.length) {
+      this.form = competitions[this.$route.params.id]
+      this.form.quantity = competitions[this.$route.params.id].users.length
+    } else {
+      this.$router.push('/competitions')
+    }
+  },
   methods: {
+    deleteCompetition () {
+      this.$confirm('Êtes-vous certain de vouloir supprimer cette compétition?', 'Warning', {
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Non',
+        type: 'warning'
+      }).then(async () => {
+        let competitions = await this.$localForage.getItem('competitions')
+        competitions.splice(this.$route.params.id, 1)
+        await this.$localForage.setItem('competitions', competitions)
+        this.$router.push('/competitions')
+        this.$message({
+          type: 'success',
+          message: 'Compétition supprimée'
+        })
+      }).catch(() => {})
+    },
     save (formName) {
       this.$refs[formName].validate(async (valid) => {
         if (valid) {
@@ -63,22 +90,26 @@ export default {
             active: true
           }
           for (let i = 0; i < this.form.quantity; i++) {
-            competition.users.push({
-              userId: null,
-              number: i + 1,
-              times: {
-                firstLap: null,
-                secondLap: null
-              }
-            })
+            if (i < this.form.users.length) {
+              competition.users[i] = this.form.users[i]
+            } else {
+              competition.users.push({
+                userId: null,
+                number: i + 1,
+                times: {
+                  firstLap: null,
+                  secondLap: null
+                }
+              })
+            }
           }
           let competitions = await this.$localForage.getItem('competitions') || []
-          competitions.push(competition)
+          competitions[this.$route.params.id] = competition
           await this.$localForage.setItem('competitions', competitions)
-          this.$router.push('/competitions/' + (competitions.length - 1))
+          this.$router.push('/competitions/' + this.$route.params.id)
           this.$message({
             type: 'success',
-            message: 'Compétition enregistrée'
+            message: 'Compétition modifiée'
           })
         }
       })
