@@ -1,28 +1,31 @@
 <template>
-  <el-container>
+  <el-container v-if="form">
     <el-header>
       <el-button type="text" @click="$router.push('/competitions/' + $route.params.id)" class="Action Action--left">
         <i class="el-icon-back"></i>
       </el-button>
-      <el-button type="text" @click="deleteCompetition" class="Action Action--right">
-        <i class="el-icon-delete"></i>
-      </el-button>
-      <h1 class="Title">Modification du #000</h1>
+      <h1 class="Title">Modification du #{{ form.number }}</h1>
     </el-header>
     <el-main>
-      <pre>{{ competition }}</pre>
-      <el-form ref="competitionForm" :model="form" :rules="rules">
-        <el-form-item label="Nom" prop="name">
-          <el-input v-model="form.name"></el-input>
+      <el-form ref="competitionForm" :model="form">
+        <div class="AvatarPicker">
+          <img v-if="form.userId !== null && users[form.userId]" :src="'/images/' + users[form.userId].avatar + '.png'" alt="avatar"/>
+          <div v-else class="Unknown">?</div>
+        </div>
+        <el-form-item>
+          <el-select v-model="form.userId" style="width:100%">
+            <el-option label="Inconnu" :value="null"></el-option>
+            <el-option v-for="(user, i) in users" :key="i" :label="user.name" :value="i" v-if="user.active"></el-option>
+          </el-select>
         </el-form-item>
-        <el-form-item label="Date" prop="date">
-          <el-date-picker type="date" placeholder="Sélectionner une date" v-model="form.date" :picker-options="{ firstDayOfWeek: 1 }" format="dd/MM/yyyy" style="width: 100%;"></el-date-picker>
+        <el-form-item label="Temps première manche">
+          <el-time-picker v-model="form.times.firstLap" :picker-options="{ selectableRange: '00:00:00 - 23:59:59' }" value-format="HH:mm:ss" placeholder="Sélectionner un temps" style="width: 100%;"></el-time-picker>
         </el-form-item>
-        <el-form-item label="Nombre de participant" prop="quantity">
-          <el-input-number v-model="form.quantity" :min="1" :max="1000" style="width:100%;"></el-input-number>
+        <el-form-item label="Temps deuxième manche">
+          <el-time-picker v-model="form.times.secondLap" :picker-options="{ selectableRange: '00:00:00 - 23:59:59' }" value-format="HH:mm:ss" placeholder="Sélectionner un temps" style="width: 100%;"></el-time-picker>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="save('competitionForm')" style="width: 100%">Enregistrer</el-button>
+          <el-button type="primary" @click="save" style="width: 100%">Enregistrer</el-button>
         </el-form-item>
       </el-form>
     </el-main>
@@ -33,85 +36,33 @@
 export default {
   data() {
     return {
-      competition: null,
-      form: {
-        name: '',
-        date: new Date(),
-        quantity: 1,
-        active: true
-      },
-      rules: {
-        name: [
-          { required: true, message: 'Le nom est obligatoire', trigger: 'blur' },
-          { min: 3, max: 30, message: 'Minimum 3 caractères / Maximum 30 caractères', trigger: 'blur' }
-        ],
-        date: [
-          { type: 'date', required: true, message: 'La date est obligatoire', trigger: 'change' }
-        ],
-        quantity: [
-          { required: true, message: 'Le nombre de participant est obligatoire', trigger: 'blur' }
-        ]
-      }
+      users: [],
+      form: null
     }
   },
   async mounted () {
+    this.users = await this.$localForage.getItem('users') || []
     let competitions = await this.$localForage.getItem('competitions') || null
     if (competitions && this.$route.params.id < competitions.length) {
-      this.form = competitions[this.$route.params.id]
-      this.form.quantity = competitions[this.$route.params.id].users.length
+      this.form = competitions[this.$route.params.id].users.find(u => u.number == this.$route.params.uid)
     } else {
       this.$router.push('/competitions')
     }
   },
   methods: {
-    deleteCompetition () {
-      this.$confirm('Êtes-vous certain de vouloir supprimer cette compétition?', 'Warning', {
-        confirmButtonText: 'Oui',
-        cancelButtonText: 'Non',
-        type: 'warning'
-      }).then(async () => {
-        let competitions = await this.$localForage.getItem('competitions')
-        competitions.splice(this.$route.params.id, 1)
-        await this.$localForage.setItem('competitions', competitions)
-        this.$router.push('/competitions')
-        this.$message({
-          type: 'success',
-          message: 'Compétition supprimée'
-        })
-      }).catch(() => {})
-    },
-    save (formName) {
-      this.$refs[formName].validate(async (valid) => {
-        if (valid) {
-          let competition = {
-            name: this.form.name,
-            date: this.form.date,
-            users: [],
-            active: true
-          }
-          for (let i = 0; i < this.form.quantity; i++) {
-            if (i < this.form.users.length) {
-              competition.users[i] = this.form.users[i]
-            } else {
-              competition.users.push({
-                userId: null,
-                number: i + 1,
-                times: {
-                  firstLap: null,
-                  secondLap: null
-                }
-              })
-            }
-          }
-          let competitions = await this.$localForage.getItem('competitions') || []
-          competitions[this.$route.params.id] = competition
-          await this.$localForage.setItem('competitions', competitions)
-          this.$router.push('/competitions/' + this.$route.params.id)
-          this.$message({
-            type: 'success',
-            message: 'Compétition modifiée'
-          })
+    async save () {
+      let competitions = await this.$localForage.getItem('competitions') || []
+      for (let u = 0; u < competitions[this.$route.params.id].users.length; u++) {
+        if (competitions[this.$route.params.id].users[u].number == this.$route.params.uid) {
+          competitions[this.$route.params.id].users[u] = this.form
         }
+      }
+      await this.$localForage.setItem('competitions', competitions)
+      this.$router.push('/competitions/' + this.$route.params.id)
+      this.$message({
+        type: 'success',
+        showClose: true,
+        message: 'Modification enregistrée'
       })
     }
   }

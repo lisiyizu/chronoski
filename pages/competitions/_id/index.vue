@@ -14,11 +14,11 @@
       <ul class="List">
         <li v-for="(u, i) in competition.users" :key="i">
           <nuxt-link :to="'/competitions/' + i + '/' + u.number">
-            <img v-if="u.userId" :src="'@/assets/images/0.png'" alt="Avatar">
+            <img v-if="u.user" :src="'@/assets/images/0.png'" alt="Avatar">
             <div v-else class="Unknown">?</div>
             <div class="User">
               <el-tag style="float: right">{{ i + 1 }}</el-tag>
-              <h4><b>#{{ u.number }}</b> - {{ u.userId ? 'USER ID' : 'Inconnu' }}</h4>
+              <h4><b>#{{ u.number }}</b> - {{ u.user ? u.user.name : 'Inconnu' }}</h4>
               <p>Temps total / Manche 1 / Manche 2</p>
               <!-- <pre>{{ u }}</pre> -->
             </div>

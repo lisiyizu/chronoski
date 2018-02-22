@@ -110,7 +110,7 @@ export default {
           this.$router.push('/competitions/' + this.$route.params.id)
           this.$message({
             type: 'success',
-          showClose: true,
+            showClose: true,
             message: 'Compétition modifiée'
           })
         }
