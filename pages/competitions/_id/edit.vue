@@ -10,7 +10,6 @@
       <h1 class="Title">Édition d'une compétition</h1>
     </el-header>
     <el-main>
-      <pre>{{ competition }}</pre>
       <el-form ref="competitionForm" :model="form" :rules="rules">
         <el-form-item label="Nom" prop="name">
           <el-input v-model="form.name"></el-input>
@@ -19,7 +18,7 @@
           <el-date-picker type="date" placeholder="Sélectionner une date" v-model="form.date" :picker-options="{ firstDayOfWeek: 1 }" format="dd/MM/yyyy" style="width: 100%;"></el-date-picker>
         </el-form-item>
         <el-form-item label="Nombre de participant" prop="quantity">
-          <el-input-number v-model="form.quantity" :min="1" :max="1000" style="width:100%;"></el-input-number>
+          <el-input-number v-model="form.quantity" :controls="false" style="width:100%;text-align:left;"></el-input-number>
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="save('competitionForm')" style="width: 100%">Enregistrer</el-button>
@@ -33,7 +32,6 @@
 export default {
   data() {
     return {
-      competition: null,
       form: {
         name: '',
         date: new Date(),
@@ -98,8 +96,8 @@ export default {
                 userId: null,
                 number: i + 1,
                 times: {
-                  firstLap: null,
-                  secondLap: null
+                  firstLap: '00:00:00',
+                  secondLap: '00:00:00'
                 }
               })
             }

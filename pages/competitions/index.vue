@@ -10,7 +10,7 @@
       <h1 class="Title">Compétitions</h1>
     </el-header>
     <el-main>
-      <ul v-if="competitions.length" class="List">
+      <ul v-if="filteredCompetitions.length" class="List">
         <li v-for="(c, i) in competitions" :key="i" v-if="c.active">
           <nuxt-link :to="'/competitions/' + i">
             <h2>{{ c.name }}</h2>
@@ -35,6 +35,11 @@ export default {
   },
   async mounted () {
     this.competitions = await this.$localForage.getItem('competitions') || []
+  },
+  computed: {
+    filteredCompetitions () {
+      return this.competitions.filter(c => c.active)
+    }
   }
 }
 </script>

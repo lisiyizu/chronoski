@@ -12,7 +12,27 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: $--color-bg;
 }
-
+.page-enter-active, .page-leave-active {
+  transition: opacity .5s
+}
+.page-enter, .page-leave-active {
+  opacity: 0
+}
+.el-input-number .el-input__inner {
+  text-align: left;
+}
+.el-message {
+  height: 60px;
+  width: calc(100% - 120px) !important;
+  border-radius: 0px;
+}
+.el-message-box {
+  display: block;
+  width: 100%;
+  border-radius: 0px;
+  border: none;
+  height: 100%;
+}
 .el-container {
   height: 100vh;
   .el-header {

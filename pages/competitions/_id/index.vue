@@ -11,14 +11,18 @@
     </el-header>
     <el-main>
       <ul class="List">
-        <li v-for="(u, i) in competition.users" :key="i">
+        <li v-for="(u, i) in filteredUsers" :key="i">
           <nuxt-link :to="'/competitions/' + $route.params.id + '/' + u.number">
             <img v-if="u.userId !== null" :src="'/images/' + users[u.userId].avatar + '.png'" alt="Avatar">
             <div v-else class="Unknown">?</div>
             <div class="User">
-              <el-tag style="float: right">{{ i + 1 }}</el-tag>
+              <el-tag style="float: right">{{ asc ? i + 1 : filteredUsers.length - i }}</el-tag>
               <h4><b>#{{ u.number }}</b> - {{ u.userId ? users[u.userId].name : 'Inconnu' }}</h4>
-              <p>1) {{ u.times.firstLap || '-'}} / 2) {{ u.times.secondLap || '-'}} / Total: ???</p>
+              <p>
+                1) {{ u.times.firstLap || '-'}} /
+                2) {{ u.times.secondLap || '-'}} /
+                Total: {{ parseFloat(u.times.firstLap.split(':').join()) - parseFloat(u.times.secondLap.split(':').join()) }}
+              </p>
             </div>
           </nuxt-link>
         </li>
@@ -65,12 +69,28 @@ export default {
   },
   computed: {
     filteredUsers () {
-      if (this.search) {
-        // FILTERED
-      } else {
-        // ORDERED
-      }
-      return []
+      return this.competition ? this.competition.users.filter((u) => {
+        let name = u.userId ? this.users[u.userId].name.toLowerCase() : 'inconnu'
+        return this.search ? (name.indexOf(this.q.toLowerCase()) > -1 || u.number == this.q) : true
+      }).sort((userA, userB) => {
+        if (this.filter === 'number') {
+          return this.asc ? userA.number - userB.number : userB.number - userA.number
+        } else if (this.filter === 'firstLap' || this.filter === 'secondLap') {
+          // Order u.times.X
+          let timeA = parseInt(userA.times[this.filter].split(':').join())
+          let timeB = parseInt(userB.times[this.filter].split(':').join())
+          timeA = timeA > 0 ? timeA : 999999
+          timeB = timeB > 0 ? timeB : 999999
+          return this.asc ? timeA - timeB : timeB - timeA
+        }
+        let timeA = parseInt(userA.times[this.filter].split(':').join())
+        let timeB = parseInt(userB.times[this.filter].split(':').join())
+        timeA = timeA > 0 ? timeA : 999999
+        timeB = timeB > 0 ? timeB : 999999
+        return this.asc ? timeA - timeB : timeB - timeA
+        // Sort total
+        return false
+      }) : []
     }
   },
   methods: {

@@ -1,7 +1,7 @@
 const webpack = require('webpack')
 
 module.exports = {
-  mode: 'universal',
+  mode: 'spa',
   head: {
     title: 'Chronoski',
     meta: [
