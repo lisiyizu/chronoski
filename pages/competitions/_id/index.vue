@@ -51,10 +51,10 @@ export default {
       competition: null,
       users: [],
       options: [
-        { label: 'Classement général', value: 'total'},
+        { label: 'Numéro de dossard', value: 'number'},
         { label: 'Première manche', value: 'firstLap'},
         { label: 'Deuxième manche', value: 'secondLap'},
-        { label: 'Numéro de dossard', value: 'number'}
+        { label: 'Classement général', value: 'total'}
       ]
     }
   },
