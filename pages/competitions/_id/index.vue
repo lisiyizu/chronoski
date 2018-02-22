@@ -20,8 +20,8 @@
               <h4><b>#{{ u.number }}</b> - {{ u.userId ? users[u.userId].name : 'Inconnu' }}</h4>
               <p>
                 1) {{ u.times.firstLap || '-'}} /
-                2) {{ u.times.secondLap || '-'}} /
-                Total: {{ parseFloat(u.times.firstLap.split(':').join()) - parseFloat(u.times.secondLap.split(':').join()) }}
+                2) {{ u.times.secondLap || '-'}}
+                <!-- Total: {{ parseFloat(u.times.firstLap.split(':').join()) - parseFloat(u.times.secondLap.split(':').join()) }} -->
               </p>
             </div>
           </nuxt-link>
@@ -57,8 +57,8 @@ export default {
       options: [
         { label: 'Numéro de dossard', value: 'number'},
         { label: 'Première manche', value: 'firstLap'},
-        { label: 'Deuxième manche', value: 'secondLap'},
-        { label: 'Classement général', value: 'total'}
+        { label: 'Deuxième manche', value: 'secondLap'}
+        // { label: 'Classement général', value: 'total'}
       ]
     }
   },
