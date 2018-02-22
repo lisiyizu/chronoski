@@ -10,17 +10,15 @@
       <h1 class="Title">{{ competition.name }}</h1>
     </el-header>
     <el-main>
-      <!-- <pre>{{ competition }}</pre> -->
       <ul class="List">
         <li v-for="(u, i) in competition.users" :key="i">
-          <nuxt-link :to="'/competitions/' + i + '/' + u.number">
-            <img v-if="u.user" :src="'@/assets/images/0.png'" alt="Avatar">
+          <nuxt-link :to="'/competitions/' + $route.params.id + '/' + u.number">
+            <img v-if="u.userId !== null" :src="'/images/' + users[u.userId].avatar + '.png'" alt="Avatar">
             <div v-else class="Unknown">?</div>
             <div class="User">
               <el-tag style="float: right">{{ i + 1 }}</el-tag>
-              <h4><b>#{{ u.number }}</b> - {{ u.user ? u.user.name : 'Inconnu' }}</h4>
-              <p>Temps total / Manche 1 / Manche 2</p>
-              <!-- <pre>{{ u }}</pre> -->
+              <h4><b>#{{ u.number }}</b> - {{ u.userId ? users[u.userId].name : 'Inconnu' }}</h4>
+              <p>1) {{ u.times.firstLap || '-'}} / 2) {{ u.times.secondLap || '-'}} / Total: ???</p>
             </div>
           </nuxt-link>
         </li>
@@ -51,6 +49,7 @@ export default {
       asc: true,
       filter: 'number',
       competition: null,
+      users: [],
       options: [
         { label: 'Classement général', value: 'total'},
         { label: 'Première manche', value: 'firstLap'},
@@ -60,8 +59,19 @@ export default {
     }
   },
   async mounted () {
+    this.users = await this.$localForage.getItem('users') || []
     let competitions = await this.$localForage.getItem('competitions') || null
     this.competition = competitions[this.$route.params.id]
+  },
+  computed: {
+    filteredUsers () {
+      if (this.search) {
+        // FILTERED
+      } else {
+        // ORDERED
+      }
+      return []
+    }
   },
   methods: {
     save (formName) {

@@ -44,7 +44,7 @@ export default {
       let total = 0;
       if (competitions) {
         for (let i = 0; i < competitions.length; i++) {
-          if (competitions[i].users.find(u => u.userId === a)) {
+          if (competitions[i].active && competitions[i].users.find(u => u.userId === a)) {
             total++
           }
         }
