@@ -26,17 +26,19 @@ export default {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
   // background-color: $--color-primary-light;
   &__Content {
-    width: 50%;
+    line-height: normal;
     svg {
+      height: 150px;
       margin-bottom: 20px;
     }
     .el-button {
       display: block;
       margin: 0;
       width: 100%;
+      font-size: 16px;
       margin-top: 20px;
     }
   }

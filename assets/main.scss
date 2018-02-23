@@ -4,7 +4,7 @@
 body {
   font-family: "Lucida Sans Unicode", "Lucida Grande", "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
   margin: 0;
-  font-size: 14px;
+  font-size: 16px;
   word-spacing: 1px;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -13,13 +13,20 @@ body {
   background-color: #fff;
 }
 .page-enter-active, .page-leave-active {
-  transition: opacity .5s
+  transition: opacity .25s
 }
 .page-enter, .page-leave-active {
   opacity: 0
 }
+.el-input__inner {
+  font-size: 16px;
+}
 .el-input-number .el-input__inner {
   text-align: left;
+}
+.el-button--primary {
+  font-size: 16px;
+  padding: 15px 20px;
 }
 .el-message {
   height: 60px;
@@ -34,8 +41,14 @@ body {
   height: 100%;
 }
 .el-container {
+  // top: 0;
+  // right: 0;
+  // left: 0;
+  // bottom: 0;
   height: 100vh;
+  // position: fixed;
   .el-header {
+    height: 60px;
     background-color: $--color-primary;
     color: #fff;
     .Title {
@@ -44,6 +57,7 @@ body {
       padding: 0 20px;
       white-space: nowrap;
       overflow: hidden;
+      font-size: 20px;
       text-overflow: ellipsis;
     }
     .Action {
@@ -60,6 +74,7 @@ body {
     }
   }
   .el-main {
+    height: calc(100vh - 120px);
     padding: 0;
     .List {
       list-style: none;
@@ -76,9 +91,10 @@ body {
           background-color: #fcfcfc;
           border-bottom: 1px solid $--color-primary-light;
           h2 {
-            font-weight: 400;
+            font-weight: 600;
             margin-top: 0;
-            margin-bottom: 10px;
+            font-size: 18px;
+            margin-bottom: 15px;
             color: $--color-primary;
           }
           p {
@@ -96,9 +112,10 @@ body {
             line-height: 64px;
             text-align: center;
           }
-          img {
+          .Avatar {
             float: left;
-            display: block;
+            height: 64px;
+            width: 64px;
           }
           .User {
             overflow: hidden;
@@ -117,8 +134,8 @@ body {
               height: 32px;
               line-height: 32px;
               margin: 0;
-              font-weight: 400;
-              font-size: 1.25em;
+              font-weight: 600;
+              font-size: 18px;
               color: $--color-primary;
               b {
                 color: $--color-primary-dark;
@@ -137,20 +154,22 @@ body {
     }
     .AvatarPicker {
       text-align: center;
-      height: 64px;
+      height: 128px;
       margin-bottom: 20px;
-      img {
+      .Avatar {
         display: inline-block;
+        height: 128px;
+        width: 128px;
       }
       .Unknown {
-        width: 64px;
-        height: 64px;
-        border-radius: 64px;
+        width: 128px;
+        height: 128px;
+        border-radius: 128px;
         display: inline-block;
         background-color: $--color-primary-light;
         color: $--color-primary;
-        font-size: 32px;
-        line-height: 64px;
+        font-size: 64px;
+        line-height: 128px;
         text-align: center;
       }
       &--left {
@@ -158,24 +177,26 @@ body {
         padding: 9px;
         margin-right: 20px;
         float: left;
-        margin-top: 16px;
+        margin-top: 47px;
       }
       &--right {
         width: 34px;
         padding: 9px;
         margin-left: 20px;
         float: right;
-        margin-top: 16px;
+        margin-top: 47px;
       }
     }
     .Empty {
       font-weight: 300;
       padding: 20px;
       text-align: center;
+      font-size: 16px;
       color: $--color-primary;
     }
   }
   .el-footer {
+    height: 60px;
     background-color: $--color-primary-light;
     .Action {
       color: $--color-primary;

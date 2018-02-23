@@ -13,7 +13,7 @@
       <ul v-if="users.length" class="List">
         <li v-for="(u, i) in users" :key="i" v-if="u.active">
           <nuxt-link :to="'/users/' + i">
-            <img :src="'/images/' + u.avatar + '.png'" alt="Avatar">
+            <avatar :number="u.avatar"/>
             <div class="User">
               <h4>{{ u.name }}</h4>
               <p>{{ u.total }}</p>
@@ -29,8 +29,12 @@
 </template>
 
 <script>
+import avatar from '@/components/avatar'
 
 export default {
+  components: {
+    avatar
+  },
   data () {
     return {
       users: []

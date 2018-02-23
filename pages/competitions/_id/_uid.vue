@@ -9,7 +9,7 @@
     <el-main>
       <el-form ref="competitionForm" :model="form">
         <div class="AvatarPicker">
-          <img v-if="form.userId !== null && users[form.userId]" :src="'/images/' + users[form.userId].avatar + '.png'" alt="avatar"/>
+          <avatar v-if="form.userId !== null && users[form.userId]" :number="users[form.userId].avatar"/>
           <div v-else class="Unknown">?</div>
         </div>
         <el-form-item>
@@ -33,7 +33,12 @@
 </template>
 
 <script>
+import avatar from '@/components/avatar'
+
 export default {
+  components: {
+    avatar
+  },
   data() {
     return {
       users: [],

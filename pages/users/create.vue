@@ -15,7 +15,7 @@
           <el-button type="primary" @click="form.avatar++" class="AvatarPicker--right" :disabled="form.avatar === 14" round>
             <i class="el-icon-caret-right"></i>
           </el-button>
-          <img :src="'/images/' + form.avatar + '.png'" alt="avatar"/>
+          <avatar :number="form.avatar"/>
         </div>
         <el-form-item prop="name">
           <el-input v-model="form.name" placeholder="Surnom"></el-input>
@@ -29,7 +29,12 @@
 </template>
 
 <script>
+import avatar from '@/components/avatar'
+
 export default {
+  components: {
+    avatar
+  },
   data() {
     return {
       form: {
