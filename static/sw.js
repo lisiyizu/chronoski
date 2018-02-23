@@ -8,40 +8,40 @@ const workboxSW = new self.WorkboxSW({
 
 workboxSW.precache([
   {
-    "url": "/_nuxt/app.53615adf4475087cd616.js",
-    "revision": "d2eeb72acb9daf59c82eed2900ba2b50"
+    "url": "/_nuxt/app.384de948ed00eb8e3ec9.js",
+    "revision": "91cc760174bbdd7a4a5d5d170fbe1aa8"
   },
   {
-    "url": "/_nuxt/layouts/default.88cfed2fa6fd3dc18e30.js",
-    "revision": "5d51c0fea223263bd8f53ccaee8ca0a4"
+    "url": "/_nuxt/layouts/default.911e76822251e7d5c700.js",
+    "revision": "f0c0622fc79cd039a9f7814a8467c42b"
   },
   {
-    "url": "/_nuxt/manifest.1ac81cf6963e4682770e.js",
-    "revision": "aa8e126aa5df69783a5deda1abf35033"
+    "url": "/_nuxt/manifest.42a8a79bd27b96ea0759.js",
+    "revision": "2b1e11915f7f19f713d1e59dddad4902"
   },
   {
-    "url": "/_nuxt/pages/competitions/_id.e26b3bc1e434d70741ba.js",
-    "revision": "99d7178b6aeecab7484943573fd52299"
+    "url": "/_nuxt/pages/competitions/_id.3abac328d55ee04f3c43.js",
+    "revision": "a4889021f0fad813d4ccb621a6f61542"
   },
   {
     "url": "/_nuxt/pages/competitions/_id/_uid.9eba53fcd0ca72fff00f.js",
     "revision": "512c21604e41c5e26b9e2cf10fe6dd8e"
   },
   {
-    "url": "/_nuxt/pages/competitions/_id/edit.e10ab6097b5e296e8235.js",
-    "revision": "26b8d2cbe0d19c48f539b6e84d914c76"
+    "url": "/_nuxt/pages/competitions/_id/edit.be76408af1200d396ece.js",
+    "revision": "704d9a70b7ddbd0a2ce0d9ec3ec0815c"
   },
   {
     "url": "/_nuxt/pages/competitions/_id/index.0685e74346fc76d09b1e.js",
     "revision": "466a05fa211c2fcb03bbdd31909c50f8"
   },
   {
-    "url": "/_nuxt/pages/competitions/create.7edbd4ea056e21bce337.js",
-    "revision": "b51f0e62bc9af16ad6d27a7cd851cc34"
+    "url": "/_nuxt/pages/competitions/create.f8186fc37d7c966c27a6.js",
+    "revision": "d941ee6ff5d1353feaa10a4290461bef"
   },
   {
-    "url": "/_nuxt/pages/competitions/index.ca99a5afa97d837ffecc.js",
-    "revision": "e237ca14ece12b5add11d7be54b2557a"
+    "url": "/_nuxt/pages/competitions/index.0684ccb65fe003267105.js",
+    "revision": "01638dc1bfaef0361c92cd5adf2d95fa"
   },
   {
     "url": "/_nuxt/pages/index.3f2420832179b2ed6c64.js",
