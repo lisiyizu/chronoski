@@ -1,6 +1,6 @@
 {
   "name": "chronoski",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Sauvegarder les temps des participants lors des compétitions de ski.",
   "author": "Alex",
   "private": true,
