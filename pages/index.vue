@@ -1,7 +1,7 @@
 <template>
   <div class="Home">
     <div class="Home__Content">
-      <h1>Chronoski</h1>
+      <logo/>
       <el-button type="primary" @click="$router.push('/users')">Utilisateurs</el-button>
       <el-button type="primary" @click="$router.push('/competitions')">Compétitions</el-button>
       <!-- <nuxt-link to="users" class="Home__Content__Action">Utilisateurs</nuxt-link>
@@ -11,7 +11,12 @@
 </template>
 
 <script>
+import logo from '@/components/logo'
+
 export default {
+  components: {
+    logo
+  }
 }
 </script>
 
