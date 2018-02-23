@@ -12,12 +12,12 @@ body {
   -webkit-font-smoothing: antialiased;
   background-color: #fff;
 }
-.page-enter-active, .page-leave-active {
-  transition: opacity .25s
-}
-.page-enter, .page-leave-active {
-  opacity: 0
-}
+// .page-enter-active, .page-leave-active {
+//   transition: opacity .25s
+// }
+// .page-enter, .page-leave-active {
+//   opacity: 0
+// }
 .el-input__inner {
   font-size: 16px;
 }
