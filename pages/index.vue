@@ -1,8 +1,11 @@
 <template>
   <div class="Home">
     <div class="Home__Content">
-      <nuxt-link to="users" class="Home__Content__Action">Utilisateurs</nuxt-link>
-      <nuxt-link to="competitions" class="Home__Content__Action">Competitions</nuxt-link>
+      <h1>Chronoski</h1>
+      <el-button type="primary" @click="$router.push('/users')">Utilisateurs</el-button>
+      <el-button type="primary" @click="$router.push('/competitions')">Compétitions</el-button>
+      <!-- <nuxt-link to="users" class="Home__Content__Action">Utilisateurs</nuxt-link>
+      <nuxt-link to="competitions" class="Home__Content__Action">Competitions</nuxt-link> -->
     </div>
   </div>
 </template>
