@@ -33,7 +33,7 @@ module.exports = {
     name: 'Chronoski',
     short_name: 'Chronoski',
     description: 'Sauvegarder les temps des participants lors des compétitions de ski',
-    theme_color: '#7097F1'
+    theme_color: '#226f96'
   },
   build: {
     plugins: [
